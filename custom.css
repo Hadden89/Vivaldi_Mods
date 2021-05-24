@@ -1,0 +1,72 @@
+/** Hadden89 Modset updated for Vivaldi 3.8 RC2/Stable **/
+
+/** <-- Bookmark+Urlfield Mods --> **/
+.UrlBar-AddressField {order: -1;} /* Navigation buttons AFTER URLbar */
+
+/** <--Buttons&Icons Mods--> **/
+.ExtensionIcon > button, /*Ally: make ext buttons clearer*/
+.ExtensionIcon--Hidden > button {
+	filter: drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25))
+	drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25))
+	drop-shadow(0 1px 0 rgba(246, 246, 246, 0.25))
+	drop-shadow(0 0px 0 rgba(246, 246, 246, 0.25));
+}
+
+/* And make them bigger as the profile button */
+.toolbar-extensions.toolbar-extensions.toolbar-extensions .button-toolbar > button > img {
+	transform: scale(1.3);
+}
+
+/* Crazy VB-39040 workaround for CookieAutoDelete */
+.extension-popup.top > webview[src="chrome-extension://fhcgjolkccmbidfldomjliifgaodjagh/popup/popup.html"] {
+	min-width: 640px; min-height: 402px; /* Set the minimum extension popup get */
+    max-width: 1000px; max-height: 1200px; /* Set the maximum extension popup get */
+    transform: top-left; /* Should preserve clickability outside the popup */
+}
+
+/* Hide specific extensions from the wrapper */
+/* You HAVE TO look your NEED IDs in vivaldi://extensions */
+.button-toolbar.dflfdkiianfmhhglhmjiebeilemlnlkm, /*DarkChrome*/
+.button-toolbar.klclhkfnbhgclcfgokbddlebgkejehcd, /*V-Scrolls*/
+.button-toolbar.ngpampappnmepgilojfohadhhmbhlaek {display: none;} /*IDM*/
+
+/* Urlfield: Hide unused buttons on guest profile (no native mode)*/
+/*
+:not(.native) .button-toolbar.button-narrow.rewind,
+:not(.native) .button-toolbar.button-narrow.fast-forward,
+:not(.native) .button-toolbar.home
+:not(.native) .UrlBar-SearchField.iconmenu-container.SearchField {display: none !important;}
+*/
+
+/** <-- General UI Mods --> **/
+/* Status Bar On Top Mod */
+#header, .toolbar-statusbar {order: -1;} 
+.toolbar-statusbar {background: var(--colorAccentBg); box-shadow: none;} 
+.button-popup { /*tnx to sjudenim and potmeklecbohdan for their help*/
+    bottom: unset !important;
+    top: 32px;
+    border-radius: 3px;
+}
+.button-popup-arrow--above:before {bottom: unset !important;}
+.button-popup:before {
+    top: -20px;
+    bottom: unset !important;
+    margin-left: 0 !important;
+    transform: rotate(180deg) translateX(calc(10px - var(--popupLeftOffset)));
+}
+.button-popup-arrow--light:before {
+    border-top-color: var(--colorBg);
+    border-bottom-color: var(--colorBg);
+}
+.button-popup-arrow--light--above:after {
+    border-top-color: var(--colorBgDark);
+    border-top: 10px solid var(--colorBgDark);
+}
+.button-popup .button-popup-wrapper {height: fit-content;}
+.button-popup h2 {text-align: center}
+.button-popup-wrapper {background-color: var(--colorBgDark);}
+.button-toolbar>button>span+.button-title,
+.button-toolbar>button.button-textonly {padding-top: 2px}
+
+/** <-- Panels Mods --> **/
+#switch button.preferences {margin-top: 0;} /* Gear icon after plus button */
