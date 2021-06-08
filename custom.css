@@ -1,7 +1,34 @@
+/** testing **/
+
+.webviewbtn[title*="vivaldi://flags"] svg path {
+  d: path('M437.2 403.5L320 215V64h8c13.3 0 24-10.7 24-24V24c0-13.3-10.7-24-24-24H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h8v151L10.8 403.5C-18.5 450.6 15.3 512 70.9 512h306.2c55.7 0 89.4-61.5 60.1-108.5zM137.9 320l48.2-77.6c3.7-5.2 5.8-11.6 5.8-18.4V64h64v160c0 6.9 2.2 13.2 5.8 18.4l48.2 77.6h-172z');
+  transform: scale(.024); fill: var(--colorFgAlphaHeavy);
+  transform-origin: 2px 1px; 
+}
+.webviewbtn[title*="vivaldi://settings/cookies"] svg path {
+  d: path('M10 2.5a7.5 7.5 0 1 0 7.5 7.5A7.5 7.5 0 0 0 10 2.5zm0 11a3.5 3.5 0 1 1 3.5-3.5 3.5 3.5 0 0 1-3.5 3.5z');
+  d: path('M12 3.29L11.5 0h-3L8 3.29a7 7 0 0 1 4 0zM8 16.71L8.5 20h3l.5-3.29a7 7 0 0 1-4 0zm8.16-10.04l2-2.68L16 1.87l-2.68 2a7 7 0 0 1 2.83 2.83zM3.84 13.33L1.87 16 4 18.13l2.68-2a7 7 0 0 1-2.83-2.83zM16.71 12l3.29-.5v-3L16.71 8a7 7 0 0 1 0 4zM3.29 8L0 8.5v3l3.29.5a7 7 0 0 1 0-4zm10.04 8.16l2.68 2L18.13 16l-2-2.68a7 7 0 0 1-2.83 2.83zM6.67 3.84L4 1.87 1.87 4l2 2.68a7 7 0 0 1 2.8-2.84z');
+  transform: scale(.74); fill: var(--colorFgAlphaHeavy);
+  transform-origin: 2px 1px; 
+}
+
 /** Hadden89 Modset updated for Vivaldi 3.8 RC2/Stable **/
 
 /** <-- Bookmark+Urlfield Mods --> **/
+
+/* Hide unused thing in bookmark popup */
+.BookmarkPopup .BookmarkInputField:nth-child(3), /*nickname*/
+.BookmarkPopup .BookmarkInputField:nth-child(4) /*description*/ {display: none;}
+
+/* Nyan Mod (need a small check) */
+.button-startpage:after {opacity: 0;} /* remove | */
+.startpage .button-startpage {background-color: rgba(0, 0, 0, 0.81);}
+.startpage-navigation {
+  background-image: url(./res/nyan.png); /*Nyan Mod*/
+  background-size: 150px; /* Fix Nyan Size */
+}
 .UrlBar-AddressField {order: -1;} /* Navigation buttons AFTER URLbar */
+.OmniDropdown-Label {opacity: .8;} /* Text more readable on omnidrop */
 
 /** <--Buttons&Icons Mods--> **/
 .ExtensionIcon > button, /*Ally: make ext buttons clearer*/
@@ -70,3 +97,57 @@
 
 /** <-- Panels Mods --> **/
 #switch button.preferences {margin-top: 0;} /* Gear icon after plus button */
+
+/* Hide text header on internal panels but... */
+.panel > header h1 {display: none;} 
+.webpanel-header h1 {display: initial !important;} /* ...show it on webpanels */
+
+/** <-- Rounded (toolbar buttons: NEED buttonclass.js --> */
+/** https://forum.vivaldi.net/topic/36028/class-name-buttons?page=1
+/** Button source: https://www.flaticon.com/authors/chris-veigt @ http://www.flaticon.com/ */
+.button-toolbar.back button span svg path { 
+  d: path('M293.004,78.525C249.64,3.436,153.62-22.295,78.531,21.061C3.436,64.411-22.296,160.443,21.068,235.542     c43.35,75.087,139.375,100.822,214.465,57.467C310.629,249.648,336.365,153.621,293.004,78.525z M219.836,265.802     c-60.075,34.685-136.894,14.114-171.576-45.969C13.57,159.762,34.155,82.936,94.232,48.253     c60.071-34.683,136.894-14.099,171.578,45.979C300.495,154.308,279.908,231.118,219.836,265.802z M211.986,141.328h-65.491     l17.599-17.603c6.124-6.129,6.124-16.076,0-22.197c-6.129-6.133-16.078-6.133-22.207,0l-44.402,44.4     c-6.129,6.131-6.129,16.078,0,22.213l44.402,44.402c6.129,6.128,16.078,6.128,22.207,0c6.124-6.131,6.124-16.077,0-22.201     l-17.606-17.601h65.499c8.669,0,15.697-7.041,15.697-15.701v-0.008C227.683,148.353,220.655,141.328,211.986,141.328z');
+  transform: scale(.08); 
+}
+.button-toolbar.forward button span svg path { 
+  d: path('M216.545,145.893l-44.374-44.368c-6.131-6.133-16.076-6.133-22.205,0h0.008c-6.129,6.121-6.129,16.068,0,22.197     l17.589,17.603h-65.485c-8.666,0-15.701,7.033-15.701,15.701v0.008c0,8.668,7.035,15.701,15.701,15.701h65.493l-17.597,17.601     c-6.129,6.132-6.129,16.069,0,22.201c6.122,6.136,16.066,6.136,22.197,0l44.41-44.402c6.128-6.127,6.128-16.078,0-22.209     C216.57,145.909,216.554,145.9,216.545,145.893z M235.533,21.057C160.438-22.291,64.414,3.433,21.063,78.521     c-43.356,75.096-17.633,171.119,57.464,214.483c75.087,43.353,171.119,17.625,214.476-57.47     C336.364,160.443,310.62,64.408,235.533,21.057z M265.801,219.83c-34.688,60.079-111.503,80.657-171.574,45.973     C34.158,231.118,13.565,154.304,48.25,94.229C82.932,34.151,159.756,13.567,219.828,48.25     C279.899,82.934,300.485,159.763,265.801,219.83z');
+  transform: scale(.08);
+}
+.button-toolbar.reload button span svg path { 
+  d: path('M92.779,129.86c-6.431,2.594-13.446,4.038-20.807,4.038c-14.974,0-28.517-5.924-38.572-15.492l4.604-2.73     c3.234-1.913,3.204-4.962-0.066-6.807L15.48,96.183c-3.27-1.848-5.982-0.267-6.059,3.532l-0.534,26.412     c-0.074,3.802,2.481,5.332,5.711,3.415l6.369-3.768c12.777,13.596,30.865,22.145,51,22.145c7.313,0,14.349-1.153,20.961-3.254     C107.014,140.91,100.006,126.894,92.779,129.86z M16.408,70.271c3.066-22.703,19.748-41.049,41.547-46.672V9.154     C30.509,14.725,8.914,36.336,3.327,63.775C-1.619,81.338,15.903,77.833,16.408,70.271z M64.144,35.707L86.96,22.045     c3.316-1.988,3.323-5.226,0.014-7.228L63.95,0.883c-3.311-1.999-5.985-0.49-5.966,3.381l0.121,28.034     C58.121,36.168,60.826,37.695,64.144,35.707z M143.078,102.952l-11.95-7.074l7.265,4.196c2.345-6.995,3.665-14.459,3.665-22.248     c0-21.245-9.465-40.278-24.403-53.129c-7.135-6.437-17.647,0.572-10.916,9.154C119.711,44.122,128.041,60,128.041,77.83     c0,5.198-0.767,10.212-2.088,14.985l-6.167-3.648c-3.213-1.902-5.77-0.335-5.715,3.498l0.407,26.34     c0.059,3.84,2.738,5.448,5.982,3.598l22.562-12.857C146.267,107.897,146.291,104.854,143.078,102.952z');
+  transform: scale(.17);
+}
+.button-toolbar.reload.loading button span svg path { /* actually a stop button */
+  d: path('M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255S395.25,0,255,0z M382.5,346.8l-35.7,35.7 	L255,290.7l-91.8,91.8l-35.7-35.7l91.8-91.8l-91.8-91.8l35.7-35.7l91.8,91.8l91.8-91.8l35.7,35.7L290.7,255L382.5,346.8z');
+  transform: scale(.044); 
+  transform-origin: 1px 1px; 
+}
+
+/** <-- Tab Bar Mods --> 
+/* ALLY: Taller [classic] tab stack indicator */
+.tab-indicator {border-top: 1px solid transparent;}
+
+/* Bigger unread indicator */
+#tabs-container.right .tab-position .tab.unread, #tabs-container.left .tab-position .tab.pinned {
+  background-image: linear-gradient(-135deg, var(--colorFgFaded) 8px, transparent 8px);
+}
+
+/* Hide thumbnail+tooltip for single tabs ONLY (shown on stacks) */
+#vivaldi-tooltip .tooltip .tab-solo {display: none;}
+
+/* Tooltip without thumbnail on stacks too */
+div#vivaldi-tooltip .tooltip .tooltip-item .thumbnail-image {
+    display: none; /* https://forum.vivaldi.net/post/416458 */
+}
+
+/* Two Rows of Text (it could be better?) */
+.tab-position .tab:not(.tab-group) {height: 30px;} 
+.tab-position .tab .title {
+	display: grid; white-space: normal;
+	line-height: 11px; height: 22px; margin-top: -2px;
+} 
+
+/* Visual indicator for [vertical] pinned tabs */
+#tabs-container.right .tab-position .tab.pinned, #tabs-container.left .tab-position .tab.pinned {
+  background-image: linear-gradient(315deg, var(--colorFgFaded) 8px, transparent 8px);
+}
