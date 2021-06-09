@@ -67,7 +67,7 @@
 
 /** <-- General UI Mods --> **/
 /* Status Bar On Top Mod */
-#header, .toolbar-statusbar {order: -1;} 
+footer:not(.DialogFooter):not(.BookmarkPopup-Footer) {order: -1;} 
 .toolbar-statusbar {background: var(--colorAccentBg); box-shadow: none;} 
 .button-popup { /*tnx to sjudenim and potmeklecbohdan for their help*/
     bottom: unset !important;
