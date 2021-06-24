@@ -1,4 +1,4 @@
-## Vivaldi_Mods_3.8
+## Vivaldi_Mods
 As the new browser version had some optimization under the hood, I'll do a new repo for version 3.8+ but the [old repo for Vivaldi 3.7](https://github.com/Hadden89/Vivaldi_mods) which has some unused resources/mods is still there.
 But I plan to add few more of them ^^,
 
