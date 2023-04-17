@@ -1,179 +1,172 @@
-.TabbedView {max-width: 100%;} 
-.ThemePreviews {gap: 28px;}  
+/* Hide not need things in the popup*/
+#browser.popup .bookmark-bar {display: none;}
+#browser.popup .mainbar {display: none;}
+#browser.popup #panels-container {display: none;}
+#browser.popup .tabbar-wrapper {display: none;}
+#browser.popup .toolbar.toolbar-droptarget.toolbar-statusbar.toolbar-medium {display: none;}
+#browser.popup .menubar.horizontal {display: none;}
 
-/*.bookmarkbarItem.chevron svg {transform: scale(.05);}	
-.bookmarkbarItem.chevron svg path {
-	d: path('M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z');
-	
-}*/	
-	
-/** Hadden89 Modset updated for Vivaldi 4.3 RC/Stable **/
-
-/** <-- Bookmark+Urlfield Mods --> **/
-
-/* Hide unused thing in bookmark popup */
-.BookmarkPopup .BookmarkInputField:nth-child(3), /*nickname*/
-.BookmarkPopup .BookmarkInputField:nth-child(4) /*description*/ {display: none;}
-
-.UrlBar-AddressField {order: -1;} /* Navigation buttons AFTER URLbar */
-
-/* Use the following to hide the site info text*/
-.button-addressfield.SiteInfoButton.certified .siteinfo-text {display: none;}
-/* Include the following to display the full name on hovering */
-.button-addressfield.SiteInfoButton.certified:hover .siteinfo-text {display: block;}
-
-
-/** <--Buttons&Icons Mods--> **/
-
-/* And make them bigger as the profile button */
-.toolbar-extensions.toolbar-extensions.toolbar-extensions .button-toolbar > button > img {
-	transform: scale(1.3);
+/*Bookmarkbar in urlbar - https://forum.vivaldi.net/post/588331 */
+#browser.bookmark-bar-top > #main > .bookmark-bar {
+width: var(--bar-width); height: 33px;
+position: absolute; right: 0; z-index: 10;
+}
+:root {--bar-width: 25px;} /*width of bookmarks bar*/
+@media  (max-width: 800px) {:root {--bar-width: 22px;}}
+#browser.bookmark-bar-top > #main > .mainbar {padding-right: var(--bar-width);}
+#browser.bookmark-bar-top > #main > .bookmark-bar .folder-icon+span {
+	margin-left: 0px;
+}
+/*#main > .inner {background-color: black;}*/
+.bookmark-bar.iconexceptfolders button svg path { /* FA icon instead of chevron*/
+  d: path( /* https://yqnn.github.io/svg-path-editor/ */
+    "M 2.2508 14.8987 c -0.3474 0.1782 -0.7416 -0.1341 -0.6714 -0.5328 l 0.747 -4.257 L -0.8443 7.0885 c -0.2961 -0.2826 -0.1422 -0.7992 0.2547 -0.855 l 4.4082 -0.6264 L 5.7842 1.7128 c 0.1773 -0.351 0.657 -0.351 0.8343 0 l 1.9656 3.8943 l 4.4082 0.6264 c 0.3969 0.0558 0.5508 0.5724 0.2538 0.855 l -3.1698 3.0204 l 0.747 4.257 c 0.0702 0.3987 -0.324 0.711 -0.6714 0.5328 L 6.2 12.8683 l -3.9501 2.0304 z"
+  )
 }
 
-/* Extensions button */
-.toolbar-extensions svg path {
-	d: path("M10 13l3.634-3.634c.504-.504 1.366-.147 1.366.566v6.137c0 .713-.862 1.07-1.366.566l-3.634-3.634z");
-	opacity: .75;
-} 
-
-/* Extensions popup button */
-.toolbar-extensions .extensionPopupIcons svg path {
-	d: path("M 12.5 16 L 8.86568 12.3657 C 8.36171 11.8617 8.71865 11 9.43137 11 L 15.5686 11 C 16.2814 11 16.6383 11.8617 16.1343 12.3657 L 12.5 16 Z");
-} /* https://forum.vivaldi.net/topic/75868/how-to-make-the-extension-button-in-version-5-3-back-to-5-2-s-style */
-
-
-/** <-- Rounded toolbar buttons Resurrected (Vivaldi 5+)  --> */ 
-/** Button source: https://www.flaticon.com/authors/chris-veigt **/
-/** https://forum.vivaldi.net/topic/78641/help-me-to-resurrect-rounded-buttons-3 **/
-.button-toolbar button[name="Back"] svg path { 
-d: path('M293.004,78.525C249.64,3.436,153.62-22.295,78.531,21.061C3.436,64.411-22.296,160.443,21.068,235.542     c43.35,75.087,139.375,100.822,214.465,57.467C310.629,249.648,336.365,153.621,293.004,78.525z M219.836,265.802     c-60.075,34.685-136.894,14.114-171.576-45.969C13.57,159.762,34.155,82.936,94.232,48.253     c60.071-34.683,136.894-14.099,171.578,45.979C300.495,154.308,279.908,231.118,219.836,265.802z M211.986,141.328h-65.491     l17.599-17.603c6.124-6.129,6.124-16.076,0-22.197c-6.129-6.133-16.078-6.133-22.207,0l-44.402,44.4     c-6.129,6.131-6.129,16.078,0,22.213l44.402,44.402c6.129,6.128,16.078,6.128,22.207,0c6.124-6.131,6.124-16.077,0-22.201     l-17.606-17.601h65.499c8.669,0,15.697-7.041,15.697-15.701v-0.008C227.683,148.353,220.655,141.328,211.986,141.328z');
-  transform: scale(.08); 
-}
-.button-toolbar button[name="Forward"] svg path { 
-  d: path('M216.545,145.893l-44.374-44.368c-6.131-6.133-16.076-6.133-22.205,0h0.008c-6.129,6.121-6.129,16.068,0,22.197     l17.589,17.603h-65.485c-8.666,0-15.701,7.033-15.701,15.701v0.008c0,8.668,7.035,15.701,15.701,15.701h65.493l-17.597,17.601     c-6.129,6.132-6.129,16.069,0,22.201c6.122,6.136,16.066,6.136,22.197,0l44.41-44.402c6.128-6.127,6.128-16.078,0-22.209     C216.57,145.909,216.554,145.9,216.545,145.893z M235.533,21.057C160.438-22.291,64.414,3.433,21.063,78.521     c-43.356,75.096-17.633,171.119,57.464,214.483c75.087,43.353,171.119,17.625,214.476-57.47     C336.364,160.443,310.62,64.408,235.533,21.057z M265.801,219.83c-34.688,60.079-111.503,80.657-171.574,45.973     C34.158,231.118,13.565,154.304,48.25,94.229C82.932,34.151,159.756,13.567,219.828,48.25     C279.899,82.934,300.485,159.763,265.801,219.83z');
-  transform: scale(.08); 
-}
-.button-toolbar button[name="Reload"] svg path { 
-  d: path('M92.779,129.86c-6.431,2.594-13.446,4.038-20.807,4.038c-14.974,0-28.517-5.924-38.572-15.492l4.604-2.73     c3.234-1.913,3.204-4.962-0.066-6.807L15.48,96.183c-3.27-1.848-5.982-0.267-6.059,3.532l-0.534,26.412     c-0.074,3.802,2.481,5.332,5.711,3.415l6.369-3.768c12.777,13.596,30.865,22.145,51,22.145c7.313,0,14.349-1.153,20.961-3.254     C107.014,140.91,100.006,126.894,92.779,129.86z M16.408,70.271c3.066-22.703,19.748-41.049,41.547-46.672V9.154     C30.509,14.725,8.914,36.336,3.327,63.775C-1.619,81.338,15.903,77.833,16.408,70.271z M64.144,35.707L86.96,22.045     c3.316-1.988,3.323-5.226,0.014-7.228L63.95,0.883c-3.311-1.999-5.985-0.49-5.966,3.381l0.121,28.034     C58.121,36.168,60.826,37.695,64.144,35.707z M143.078,102.952l-11.95-7.074l7.265,4.196c2.345-6.995,3.665-14.459,3.665-22.248     c0-21.245-9.465-40.278-24.403-53.129c-7.135-6.437-17.647,0.572-10.916,9.154C119.711,44.122,128.041,60,128.041,77.83     c0,5.198-0.767,10.212-2.088,14.985l-6.167-3.648c-3.213-1.902-5.77-0.335-5.715,3.498l0.407,26.34     c0.059,3.84,2.738,5.448,5.982,3.598l22.562-12.857C146.267,107.897,146.291,104.854,143.078,102.952z');
-  transform: scale(.17); 
-}
-button.ToolbarButton-Button[title='Mostra campo ricerca'] span svg path { /* Probably using EN in title would be better */ 
-  transform: scale(1.5); transform-origin: center; /* Searchbox should be big as the other buttons */
+#header { /* Themed header image from https://heropatterns.com */
+	background-image: url("data:image/svg+xml,%3Csvg width='84' height='48' viewBox='0 0 84 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h12v6H0V0zm28 8h12v6H28V8zm14-8h12v6H42V0zm14 0h12v6H56V0zm0 8h12v6H56V8zM42 8h12v6H42V8zm0 16h12v6H42v-6zm14-8h12v6H56v-6zm14 0h12v6H70v-6zm0-16h12v6H70V0zM28 32h12v6H28v-6zM14 16h12v6H14v-6zM0 24h12v6H0v-6zm0 8h12v6H0v-6zm14 0h12v6H14v-6zm14 8h12v6H28v-6zm-14 0h12v6H14v-6zm28 0h12v6H42v-6zm14-8h12v6H56v-6zm0-8h12v6H56v-6zm14 8h12v6H70v-6zm0 8h12v6H70v-6zM14 24h12v6H14v-6zm14-8h12v6H28v-6zM14 8h12v6H14V8zM0 8h12v6H0V8z' fill='%239C92AC' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
-/* Crazy VB-39040 workaround for CookieAutoDelete */
-.extension-popup.top > webview[src="chrome-extension://fhcgjolkccmbidfldomjliifgaodjagh/popup/popup.html"] {
-	min-width: 640px; min-height: 402px; /* Set the minimum extension popup get */
-    max-width: 1000px; max-height: 1200px; /* Set the maximum extension popup get */
-    transform: top-left; /* Should preserve clickability outside the popup */
-}
-
-/** <-- General UI Mods --> **/
 /* Status Bar On Top Mod */
 #header, footer:not(.DialogFooter):not(.BookmarkPopup-Footer) {order: -1;} 
 .toolbar-statusbar {background: var(--colorAccentBg); box-shadow: none;} 
 .button-popup { /*tnx to sjudenim and potmeklecbohdan for their help*/
-    bottom: unset !important;
-    top: 32px;
-    border-radius: 3px;
+    bottom: unset !important; top: 32px; border-radius: 3px;
 }
 .button-popup-arrow--above:before {bottom: unset !important;}
 .button-popup:before {
-    top: -20px;
-    bottom: unset !important;
-    margin-left: 0 !important;
+    top: -20px; bottom: unset !important; margin-left: 0 !important;
     transform: rotate(180deg) translateX(calc(10px - var(--popupLeftOffset)));
 }
 .button-popup-arrow--light:before {
-    border-top-color: var(--colorBg);
-    border-bottom-color: var(--colorBg);
+	border-top-color: var(--colorBg);
+	border-bottom-color: var(--colorBg);
 }
 .button-popup-arrow--light--above:after {
-    border-top-color: var(--colorBgDark);
+	border-top-color: var(--colorBgDark);
     border-top: 10px solid var(--colorBgDark);
 }
 .button-popup .button-popup-wrapper {height: fit-content;}
 .button-popup h2 {text-align: center}
 .button-popup-wrapper {background-color: var(--colorBgDark);}
-.button-toolbar>button>span+.button-title,
-.button-toolbar>button.button-textonly {padding-top: 2px}
+.button-toolbar>button>span+.button-title, .button-toolbar>button.button-textonly {padding-top: 2px}
+
+.bookmark-bar-top .bookmark-bar {height: 23px;} /*reduce bookmarkbar height*/
 
 /* Remove line under address bar and extensions bar */
 .address-top .mainbar > .toolbar-mainbar .toolbar-extensions:before,
-.address-top .mainbar > .toolbar-mainbar:before {
-  content: unset;
+.address-top .mainbar > .toolbar-mainbar:before {content: unset;}
+.UrlBar-AddressField {order: -1;} /* Navigation buttons AFTER URLbar */
+
+/* Hide unused thing in bookmark popup */
+.BookmarkLocationSelector-Header {display:none;} /*having both BK and SD is redundant*/
+.BookmarkPopup .BookmarkInputField:nth-child(3), /*nickname*/
+.BookmarkPopup .BookmarkInputField:nth-child(4) {display: none;} /*description*/ 
+
+.UrlBar-AddressField .ContentBlocker-Control {display: none;} /* Hide adblocker as I went back to UBO */
+
+/* Ext. buttons big as the profile button */
+.toolbar-extensions.toolbar-extensions.toolbar-extensions .button-toolbar > button > img {
+	transform: scale(1.3);
 }
 
-/* Add back a bit of textures back from https://heropatterns.com */
-#header {
-background-image: url("data:image/svg+xml,%3Csvg width='84' height='48' viewBox='0 0 84 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h12v6H0V0zm28 8h12v6H28V8zm14-8h12v6H42V0zm14 0h12v6H56V0zm0 8h12v6H56V8zM42 8h12v6H42V8zm0 16h12v6H42v-6zm14-8h12v6H56v-6zm14 0h12v6H70v-6zm0-16h12v6H70V0zM28 32h12v6H28v-6zM14 16h12v6H14v-6zM0 24h12v6H0v-6zm0 8h12v6H0v-6zm14 0h12v6H14v-6zm14 8h12v6H28v-6zm-14 0h12v6H14v-6zm28 0h12v6H42v-6zm14-8h12v6H56v-6zm0-8h12v6H56v-6zm14 8h12v6H70v-6zm0 8h12v6H70v-6zM14 24h12v6H14v-6zm14-8h12v6H28v-6zM14 8h12v6H14V8zM0 8h12v6H0V8z' fill='%239C92AC' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+button.ToolbarButton-Button[name='SearchField'] span svg path { 
+  transform: scale(1.5); transform-origin: center; /* Searchbox should be big as the other buttons */
 }
 
+/* Crazy VB-39040 workaround for CookieAutoDelete */
+.extension-popup.top > webview[src="chrome-extension://fhcgjolkccmbidfldomjliifgaodjagh/popup/popup.html"] {
+	min-width: 640px; min-height: 402px; 
+    max-width: 1000px; max-height: 1200px; 
+    transform: top-left; 
+}
+
+#tabs-container .resize {order: 1;} /*sync+closed tabs on top|left*/
+
+/* Speed Dial: Nyan Mod */
+.startpage .button-startpage {background-color: rgba(0, 0, 0, 0.81);}
+.startpage-navigation {background-image: url(nyan.png); background-size: 150px;}
+button.button-startpage {-webkit-mask-image: unset;}
+
+/* Textures for Tab Containers from https://heropatterns.com */
 #tabs-container.left, #tabs-container.right {
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-background-size: 100%; background-position: center;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+	background-size: 100%; background-position: center;
 }
 #tabs-container.top, #tabs-container.bottom {
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-background-size: 10%; background-position: center;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+	background-size: 10%; background-position: center;
 }
-
-#panels-container.left, #panels-container.right {
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='72' viewBox='0 0 36 72'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M2 6h12L8 18 2 6zm18 36h12l-6 12-6-12z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-background-size: 50%; background-position: center;
-}
-
-/** <-- Panels Mods --> **/
-
-.panel > header h1 {display: none;} /* Hide text header on internal panels but... */
-.webpanel-header h1 {display: initial !important;} /* ...show it on webpanels */
-
-/* Webpanel favicons replacements */
-.webviewbtn[title*="vivaldi://flags"] svg path {
-  d: path('M437.2 403.5L320 215V64h8c13.3 0 24-10.7 24-24V24c0-13.3-10.7-24-24-24H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h8v151L10.8 403.5C-18.5 450.6 15.3 512 70.9 512h306.2c55.7 0 89.4-61.5 60.1-108.5zM137.9 320l48.2-77.6c3.7-5.2 5.8-11.6 5.8-18.4V64h64v160c0 6.9 2.2 13.2 5.8 18.4l48.2 77.6h-172z');
-  transform: scale(.024); fill: var(--colorFgAlphaHeavy);
-  transform-origin: 2px 1px; 
-}
-.webviewbtn[title*="vivaldi://settings/cookies"] svg path {
-  d: path('M10 2.5a7.5 7.5 0 1 0 7.5 7.5A7.5 7.5 0 0 0 10 2.5zm0 11a3.5 3.5 0 1 1 3.5-3.5 3.5 3.5 0 0 1-3.5 3.5z');
-  d: path('M12 3.29L11.5 0h-3L8 3.29a7 7 0 0 1 4 0zM8 16.71L8.5 20h3l.5-3.29a7 7 0 0 1-4 0zm8.16-10.04l2-2.68L16 1.87l-2.68 2a7 7 0 0 1 2.83 2.83zM3.84 13.33L1.87 16 4 18.13l2.68-2a7 7 0 0 1-2.83-2.83zM16.71 12l3.29-.5v-3L16.71 8a7 7 0 0 1 0 4zM3.29 8L0 8.5v3l3.29.5a7 7 0 0 1 0-4zm10.04 8.16l2.68 2L18.13 16l-2-2.68a7 7 0 0 1-2.83 2.83zM6.67 3.84L4 1.87 1.87 4l2 2.68a7 7 0 0 1 2.8-2.84z');
-  transform: scale(.74); fill: var(--colorFgAlphaHeavy);
-  transform-origin: 2px 1px; 
-}
-
-#switch button.preferences {margin-top: 0;} /* Gear icon after plus button */
-
-
-/** <-- Tab Bar Mods --> **/
 
 /* Accordion arrow takes accent/border color */
 .tab-position.accordion-toggle-arrow {background-color: var(--colorAccentBorder);}
 
+/* Better visibility for favicons on (inactive) tabs */
+.tab-position .tab .tab-header .favicon {
+filter: drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(-1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(0 1px 0 rgba(246, 246, 246, 0.25)) drop-shadow(0 -1px 0 rgba(246, 246, 246, 0.25));
+}
+
 /* Two Rows of Text */ 
-.tab-position .tab .title { /* Not perfect as some chars are cutted out */
-	display: grid; white-space: normal;
-	line-height: 11px; height: 22px; margin-top: -2px;
-    -webkit-mask-image: linear-gradient(to top, transparent 5%, black 10%);
-    mask-image: linear-gradient(to top, transparent 5%, black 10%);
+.tab-position .tab .title  { /* https://www.freebestfonts.com/bankgothic-lt-bt-font */
+    font-family: "BankGothic Lt BT"; font-size: small;
+    align-items: start; white-space: pre-line;
+    line-height: 9px; height: 18px;
 } 
+
+#tabs-container.right .tab-position .tab.tab-accordion,
+#tabs-container.left .tab-position .tab.tab-accordion { /* a11y: easier to see closed accordions */
+	background-color: var(--colorAccentBorder); opacity: .6; 
+}
+#tabs-container.right .tab-position .tab:is(.active).tab-accordion,
+#tabs-container.left .tab-position .tab:is(.active).tab-accordion {
+	background-color: var(--colorAccentBorder); opacity: 1; /* a11y: easier to see closed accordions */
+}
+.tab-position.accordion-toggle-arrow{width: 97%; opacity: .6;} /*smaller arrow*/
+
+/* border between tabs */
+#tabs-container.top .tab-position .tab,
+#tabs-container.bottom .tab-position .tab { 
+	border-right: 1px groove var(--colorHighlightBgDark);
+}
+#tabs-container.right .tab-position .tab,
+#tabs-container.left .tab-position .tab {
+	border-bottom: 1px groove var(--colorHighlightBgDark);
+}
 
 /* Hide thumbnail+tooltip for single tabs ONLY (shown on stacks) */
 #vivaldi-tooltip .tooltip .tab-solo {display: none;}
 
-/* Tooltip without thumbnail on stacks too */
-div#vivaldi-tooltip .tooltip .tooltip-item .thumbnail-image {
-    display: none; /* https://forum.vivaldi.net/post/416458 */
-}
+/* Tooltip without thumbnail on stacks too */ /* https://forum.vivaldi.net/post/416458 */
+div#vivaldi-tooltip .tooltip .tooltip-item .thumbnail-image {display: none;}
 
 /* Visual indicator for [vertical] pinned tabs */
-#tabs-container.right .tab-position .tab.pinned, 
-#tabs-container.left .tab-position .tab.pinned {
+#tabs-container.right .tab-position .tab.pinned, #tabs-container.left .tab-position .tab.pinned {
   background-image: linear-gradient(315deg, var(--colorFgFaded) 8px, transparent 8px);
 }
 
-/* wrap SD text on two rows */
-.dials .dial .button-title { /* For some reasons, works better at the EOF */
+#panels-container.left, #panels-container.right { /*texture for Panels from https://heropatterns.com */
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='72' viewBox='0 0 36 72'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M2 6h12L8 18 2 6zm18 36h12l-6 12-6-12z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+	background-size: 50%; background-position: center;
+}
+
+.panel > header h1 {display: none;} /* Hide text header on internal panels but... */
+.webpanel-header h1 {display: initial !important;} /* ...show it on webpanels */
+
+/* Grayscale chromium panels */
+.button-toolbar-webpanel [title*="chrome://extensions"] img,
+.button-toolbar-webpanel [title*="chrome://settings"] img,
+.button-toolbar-webpanel [title*="chrome://flags"] img { 
+	/*filter: grayscale(100%);*/
+	/*filter: saturate(0) drop-shadow(0px 0px 0px var(--colorFg));*/
+	filter: invert(1) brightness(1) saturate(0) opacity(.1) drop-shadow(0px 0px 0px var(--colorFgFaded)) drop-shadow(0px 0px 0px var(--colorFgFaded)) drop-shadow(0px 0px 0px var(--colorFgFaded));
+}
+
+/* Vivaldi Settings */
+.TabbedView {max-width: 100%;} .ThemePreviews {gap: 28px;}  /* theme page */
+
+/* wrap speed dial text on two rows */
+.dials .dial .button-title { /* For some reasons *only* works at the EOF :D */
     text-align: center; text-overflow: clip; white-space: pre-wrap; 
     height: 31px; line-height: 15px; margin-top: -8px; 
 }
-.thumbnail-title .favicon {display: none;} 
