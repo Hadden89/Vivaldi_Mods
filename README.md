@@ -1,15 +1,10 @@
 ## NOTICE: 
-The rounded buttons mod is meant to be adapted to your layout as it relies on specific buttons orders and names. So don't put in the code if you don't want to do that.
 
-## Vivaldi_Mods
-As the new browser version had some optimization under the hood, I'll do a new repo for version 3.8+ but the [old repo for Vivaldi 3.7](https://github.com/Hadden89/Vivaldi_mods) which has some unused resources/mods is still there.
-But I plan to add few more of them ^^,
-
-**Please note: I'm not a developer but just a community user.**
+**I'm not a developer but just a Vivaldi Community user which likes to fiddle with CSS.**
 You agree to use anything contained here at your own risk. Support may not be guaranteed.
 
 ## About Vivaldi Browser
-What is Vivaldi? A [new browser](https://vivaldi.com) launched several years ago based on Chromium/Blink (which is actually a great engine) to be the spirtual successor of Opera [Presto](https://en.wikipedia.org/wiki/Presto_(browser_engine)) which original development was halted after the acquistion of the company. Why is cool? Where ALL the browser now tends to look alike the same and oversimplified - Vivaldi point to be unique, user-centric and has a great developers and community support behind it.
+What is Vivaldi? A [new browser](https://vivaldi.com) launched several years ago based on Chromium/Blink - which is actually a great engine - to be the spirtual successor of Opera [Presto](https://en.wikipedia.org/wiki/Presto_(browser_engine)) which original development was halted after the acquistion of the company. Why is cool? Where ALL the browser now tends to look alike the same and oversimplified - Vivaldi point to be unique, user-centric and has a great support from its developers and community users.
 
 In this small repo I'll list the mods I currently use on Vivaldi Browser but before doing anything please READ the [help](https://forum.vivaldi.net/topic/10549/modding-vivaldi?page=1) guide.
 
@@ -21,6 +16,6 @@ Few lines are actually tailored around my Vivaldi installation but most code sho
 For this version, I merged again the code into a single CSS but is still divided in sub-sections with comment lines. Hope is quite clear :)
 
 ## What about JS mods ?
-Usually, JS mods are not mine or I did them with the [help of people](https://github.com/Hadden89/Vivaldi_mods/blob/master/Javascript_mods.md) which really know the scripting matter.
+For JS mods you should [check or ask](https://forum.vivaldi.net/category/52/modifications) in the modification thread. I used to have a list here but is quite [outdated](https://github.com/Hadden89/Vivaldi_mods/blob/master/Javascript_mods.md).
 
 By the way, enjoy vivaldi and its community. [Join to the forum](https://forum.vivaldi.net) if you didn't that yet ;)
