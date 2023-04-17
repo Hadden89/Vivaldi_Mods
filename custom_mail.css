@@ -1,0 +1,62 @@
+/* Code I'm using +only+ on my own mail profile */
+
+/* Replace Spam Icon (bin) with the Proper Hand Icon */
+.button-toolbar button[name='MailMsgSpam'] svg path {
+d: path("M32.3,53.9C24.5,53.9 17,53.9 17,32.9C17,13.9 20.5,17.6 22.1,19.1V15.8C22.3,13.4 28.1,13.6 28.1,15.5V12.5C28.1,9.3 34.8,9.6 34.8,11.7V15.8C35,13.5 40.2,12.6 40.4,17.1C40.4,24.1 40.3,31.7 40.2,33.9C42.9,36.9 45.9,22.3 51.1,24.9C53.5,27.4 44.4,44.6 43.4,46.4C42.4,48.1 38.2,53.9 32.3,53.9");
+  transform: scale(.4);
+}
+.button-toolbar button[title='Show Junk'] svg path {
+d: path("M32.3,53.9C24.5,53.9 17,53.9 17,32.9C17,13.9 20.5,17.6 22.1,19.1V15.8C22.3,13.4 28.1,13.6 28.1,15.5V12.5C28.1,9.3 34.8,9.6 34.8,11.7V15.8C35,13.5 40.2,12.6 40.4,17.1C40.4,24.1 40.3,31.7 40.2,33.9C42.9,36.9 45.9,22.3 51.1,24.9C53.5,27.4 44.4,44.6 43.4,46.4C42.4,48.1 38.2,53.9 32.3,53.9");
+  transform: scale(.25);
+}
+  
+/* Mail filterbox height is too low (hardcoded to 3 rows) */
+.vivaldi-settings .master-detail.setting-mail-filters textarea.floating-input {min-height: 140px;}
+
+/* Add labels to mostly used buttons */
+button.ToolbarButton-Button[title='Check for mail']:after {content: 'Check\00a0';}
+button.ToolbarButton-Button[title='Compose New Mail']:after {content: 'New\00a0';}
+button.ToolbarButton-Button[title='Reply']:after {content: 'Reply\00a0';}
+/*button.ToolbarButton-Button[title='Reply to All (Shift+R)']:after {content: 'Reply All\00a0';}*/
+/*button.ToolbarButton-Button[title='Forward']:after {content: 'Forward\00a0\00a0';}*/ 
+button.ToolbarButton-Button[title='Mark Message as Spam']:after {content: 'Spam\00a0';}  
+
+/*Only show the subject by default*/
+.webpageview #mail_view #mail_detail .mail-detail-header {max-height: 9%; overflow-y: hidden;}
+/*Show FROM/TO on hover*/
+.webpageview #mail_view #mail_detail:hover .mail-detail-header { 
+  max-height: 100%; transition: max-height 1s ease-in;
+  transition-delay: 1s; padding-bottom: 24px;
+}
+
+/*Bookmarkbar in urlbar - https://forum.vivaldi.net/post/588331 */
+#browser.bookmark-bar-top > #main > .bookmark-bar {
+width: var(--bar-width); height: 33px;
+position: absolute; right: 0; z-index: 10;
+}
+:root {--bar-width: 25px;} /*width of bookmarks bar*/
+@media  (max-width: 800px) {:root {--bar-width: 22px;}}
+#browser.bookmark-bar-top > #main > .mainbar {padding-right: var(--bar-width);}
+#browser.bookmark-bar-top > #main > .bookmark-bar .folder-icon+span {
+	margin-left: 0px;
+}
+.bookmark-bar.iconexceptfolders button svg path { /* FA icon instead of chevron*/
+  d: path(
+    "M 2.2508 14.8987 c -0.3474 0.1782 -0.7416 -0.1341 -0.6714 -0.5328 l 0.747 -4.257 L -0.8443 7.0885 c -0.2961 -0.2826 -0.1422 -0.7992 0.2547 -0.855 l 4.4082 -0.6264 L 5.7842 1.7128 c 0.1773 -0.351 0.657 -0.351 0.8343 0 l 1.9656 3.8943 l 4.4082 0.6264 c 0.3969 0.0558 0.5508 0.5724 0.2538 0.855 l -3.1698 3.0204 l 0.747 4.257 c 0.0702 0.3987 -0.324 0.711 -0.6714 0.5328 L 6.2 12.8683 l -3.9501 2.0304 z"
+  )
+}
+
+/* Collapse the blocked content and hide the button*/
+/*
+.webpageview #mail_view #mail_detail .message-body-part .mail-content-blocked  {max-height: 1px;}
+.webpageview #mail_view #mail_detail .message-body-part .mail-content-blocked .content-blocked-action {display: none;}
+*/
+
+/* Show blocked content and its button hovering on mail body*/
+/*
+.webpageview #mail_view #mail_detail .message-body-part:hover .mail-content-blocked  {
+  max-height: 100%; transition: max-height 1s ease-in;
+  transition-delay: 1s;
+}
+.webpageview #mail_view #mail_detail .message-body-part:hover .mail-content-blocked .content-blocked-action {display: initial;}
+*/
