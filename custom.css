@@ -1,4 +1,14 @@
-/* Hide not need things in the popup*/
+/* Thinner toolbar when using vivaldi button */
+#browser.win.address-top .toolbar:has(.window-buttongroup.on-mainbar) .vivaldi {
+	height: 28px; transform-origin: top right;
+}
+#browser.win.address-top .toolbar:has(.window-buttongroup.on-mainbar) {
+	min-height: calc(26px / var(--uiZoomLevel));
+	padding-left: calc(26px / var(--uiZoomLevel));
+	padding-right: calc((0px * 3) / var(--uiZoomLevel));
+}
+
+/* Hide not need things in the popup window */
 #browser.popup .bookmark-bar {display: none;}
 #browser.popup .mainbar {display: none;}
 #browser.popup #panels-container {display: none;}
@@ -7,34 +17,39 @@
 #browser.popup .menubar.horizontal {display: none;}
 
 /*Bookmarkbar in urlbar - https://forum.vivaldi.net/post/588331 */
+.bookmark-bar button {width: inherit;} /* fix position */
+button.bookmarkbarItem.chevron {padding: 6px 6px;} /* fix position */
+
 #browser.bookmark-bar-top > #main > .bookmark-bar {
-width: var(--bar-width); height: 33px;
+width: var(--bar-width); height: 35px;
 position: absolute; right: 0; z-index: 10;
 }
-:root {--bar-width: 25px;} /*width of bookmarks bar*/
-@media  (max-width: 800px) {:root {--bar-width: 22px;}}
+:root {--bar-width: 34px;} /*use the same width of other icons*/
+/*@media  (max-width: 800px) {:root {--bar-width: 22px;}}*/
 #browser.bookmark-bar-top > #main > .mainbar {padding-right: var(--bar-width);}
 #browser.bookmark-bar-top > #main > .bookmark-bar .folder-icon+span {
 	margin-left: 0px;
 }
 /*#main > .inner {background-color: black;}*/
 .bookmark-bar.iconexceptfolders button svg path { /* FA icon instead of chevron*/
+	transform: scale(1.2); transform-origin: 0;
   d: path( /* https://yqnn.github.io/svg-path-editor/ */
     "M 2.2508 14.8987 c -0.3474 0.1782 -0.7416 -0.1341 -0.6714 -0.5328 l 0.747 -4.257 L -0.8443 7.0885 c -0.2961 -0.2826 -0.1422 -0.7992 0.2547 -0.855 l 4.4082 -0.6264 L 5.7842 1.7128 c 0.1773 -0.351 0.657 -0.351 0.8343 0 l 1.9656 3.8943 l 4.4082 0.6264 c 0.3969 0.0558 0.5508 0.5724 0.2538 0.855 l -3.1698 3.0204 l 0.747 4.257 c 0.0702 0.3987 -0.324 0.711 -0.6714 0.5328 L 6.2 12.8683 l -3.9501 2.0304 z"
   )
 }
 
 #header { /* Themed header image from https://heropatterns.com */
-	background-image: url("data:image/svg+xml,%3Csvg width='84' height='48' viewBox='0 0 84 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h12v6H0V0zm28 8h12v6H28V8zm14-8h12v6H42V0zm14 0h12v6H56V0zm0 8h12v6H56V8zM42 8h12v6H42V8zm0 16h12v6H42v-6zm14-8h12v6H56v-6zm14 0h12v6H70v-6zm0-16h12v6H70V0zM28 32h12v6H28v-6zM14 16h12v6H14v-6zM0 24h12v6H0v-6zm0 8h12v6H0v-6zm14 0h12v6H14v-6zm14 8h12v6H28v-6zm-14 0h12v6H14v-6zm28 0h12v6H42v-6zm14-8h12v6H56v-6zm0-8h12v6H56v-6zm14 8h12v6H70v-6zm0 8h12v6H70v-6zM14 24h12v6H14v-6zm14-8h12v6H28v-6zM14 8h12v6H14V8zM0 8h12v6H0V8z' fill='%239C92AC' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='84' height='48' viewBox='0 0 84 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h12v6H0V0zm28 8h12v6H28V8zm14-8h12v6H42V0zm14 0h12v6H56V0zm0 8h12v6H56V8zM42 8h12v6H42V8zm0 16h12v6H42v-6zm14-8h12v6H56v-6zm14 0h12v6H70v-6zm0-16h12v6H70V0zM28 32h12v6H28v-6zM14 16h12v6H14v-6zM0 24h12v6H0v-6zm0 8h12v6H0v-6zm14 0h12v6H14v-6zm14 8h12v6H28v-6zm-14 0h12v6H14v-6zm28 0h12v6H42v-6zm14-8h12v6H56v-6zm0-8h12v6H56v-6zm14 8h12v6H70v-6zm0 8h12v6H70v-6zM14 24h12v6H14v-6zm14-8h12v6H28v-6zM14 8h12v6H14V8zM0 8h12v6H0V8z' fill='%239C92AC' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
 /* Status Bar On Top Mod */
-#header, footer:not(.DialogFooter):not(.BookmarkPopup-Footer) {order: -1;} 
+#header, #browser > footer {order: -1;}
 .toolbar-statusbar {background: var(--colorAccentBg); box-shadow: none;} 
-.button-popup { /*tnx to sjudenim and potmeklecbohdan for their help*/
+.button-popup { 
     bottom: unset !important; top: 32px; border-radius: 3px;
 }
-.button-popup-arrow--above:before {bottom: unset !important;}
+.ControlPanel.Default {bottom: auto; transform: translateY(200%);}
+.button-popup:before {display: none;} 
 .button-popup:before {
     top: -20px; bottom: unset !important; margin-left: 0 !important;
     transform: rotate(180deg) translateX(calc(10px - var(--popupLeftOffset)));
@@ -47,11 +62,13 @@ position: absolute; right: 0; z-index: 10;
 	border-top-color: var(--colorBgDark);
     border-top: 10px solid var(--colorBgDark);
 }
+
 .button-popup .button-popup-wrapper {height: fit-content;}
 .button-popup h2 {text-align: center}
 .button-popup-wrapper {background-color: var(--colorBgDark);}
 .button-toolbar>button>span+.button-title, .button-toolbar>button.button-textonly {padding-top: 2px}
 
+#tabs-container .resize {order: 1;} /*sync+closed tabs on top|left*/
 .bookmark-bar-top .bookmark-bar {height: 23px;} /*reduce bookmarkbar height*/
 
 /* Remove line under address bar and extensions bar */
@@ -63,8 +80,8 @@ position: absolute; right: 0; z-index: 10;
 .BookmarkLocationSelector-Header {display:none;} /*having both BK and SD is redundant*/
 .BookmarkPopup .BookmarkInputField:nth-child(3), /*nickname*/
 .BookmarkPopup .BookmarkInputField:nth-child(4) {display: none;} /*description*/ 
-
-.UrlBar-AddressField .ContentBlocker-Control {display: none;} /* Hide adblocker as I went back to UBO */
+.BookmarkPopup { min-height: 50vh; } /* make it taller */
+.UrlBar-AddressField .ContentBlocker-Control {display: none;} /* Hide adblocker icon */
 
 /* Ext. buttons big as the profile button */
 .toolbar-extensions.toolbar-extensions.toolbar-extensions .button-toolbar > button > img {
@@ -77,12 +94,18 @@ button.ToolbarButton-Button[name='SearchField'] span svg path {
 
 /* Crazy VB-39040 workaround for CookieAutoDelete */
 .extension-popup.top > webview[src="chrome-extension://fhcgjolkccmbidfldomjliifgaodjagh/popup/popup.html"] {
-	min-width: 640px; min-height: 402px; 
+    min-width: 50vh; min-height: 50vh;	
     max-width: 1000px; max-height: 1200px; 
     transform: top-left; 
 }
 
-#tabs-container .resize {order: 1;} /*sync+closed tabs on top|left*/
+/* Replace extension button with ol' good chevron */
+.toolbar-extensions svg path {
+	d: path("M10 13l3.634-3.634c.504-.504 1.366-.147 1.366.566v6.137c0 .713-.862 1.07-1.366.566l-3.634-3.634z");
+} 
+.toolbar-extensions .extensionPopupIcons svg path { 
+	d: path("M 12.5 16 L 8.86568 12.3657 C 8.36171 11.8617 8.71865 11 9.43137 11 L 15.5686 11 C 16.2814 11 16.6383 11.8617 16.1343 12.3657 L 12.5 16 Z");
+} 
 
 /* Speed Dial: Nyan Mod */
 .startpage .button-startpage {background-color: rgba(0, 0, 0, 0.81);}
@@ -108,7 +131,7 @@ filter: drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(-1px 0 0 rgba
 }
 
 /* Two Rows of Text */ 
-.tab-position .tab .title  { /* https://www.freebestfonts.com/bankgothic-lt-bt-font */
+.tab-position .tab .title  { /*V2*/ /* https://www.freebestfonts.com/bankgothic-lt-bt-font */
     font-family: "BankGothic Lt BT"; font-size: small;
     align-items: start; white-space: pre-line;
     line-height: 9px; height: 18px;
@@ -157,9 +180,12 @@ div#vivaldi-tooltip .tooltip .tooltip-item .thumbnail-image {display: none;}
 .button-toolbar-webpanel [title*="chrome://extensions"] img,
 .button-toolbar-webpanel [title*="chrome://settings"] img,
 .button-toolbar-webpanel [title*="chrome://flags"] img { 
-	/*filter: grayscale(100%);*/
-	/*filter: saturate(0) drop-shadow(0px 0px 0px var(--colorFg));*/
 	filter: invert(1) brightness(1) saturate(0) opacity(.1) drop-shadow(0px 0px 0px var(--colorFgFaded)) drop-shadow(0px 0px 0px var(--colorFgFaded)) drop-shadow(0px 0px 0px var(--colorFgFaded));
+}
+
+/* Grayscale other webpanels */
+.button-toolbar-webpanel [title*="Home"] img { /*Example for Youtube*/
+    filter: invert(1) brightness(1) saturate(0) opacity(.7) ;
 }
 
 /* Vivaldi Settings */
@@ -170,3 +196,13 @@ div#vivaldi-tooltip .tooltip .tooltip-item .thumbnail-image {display: none;}
     text-align: center; text-overflow: clip; white-space: pre-wrap; 
     height: 31px; line-height: 15px; margin-top: -8px; 
 }
+
+  
+.dials.speeddial img.favicon { /* crisp favicons on dial view */
+filter: drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(-1px 0 0 rgba(246, 246, 246, 0.1)) drop-shadow(0 1px 0 rgba(246, 246, 246, 0.1)) drop-shadow(0 -1px 0 rgba(246, 246, 246, 0.1));
+}
+
+/* Tweak UI fonts */
+/* * {font-family: "Marlett"; text-shadow: 0 0 .8px var(--colorFgAlpha); letter-spacing: .1px;}*/
+
+
