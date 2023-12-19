@@ -1,14 +1,40 @@
-/* Thinner toolbar when using vivaldi button */
-#browser.win.address-top .toolbar:has(.window-buttongroup.on-mainbar) .vivaldi {
-	height: 28px; transform-origin: top right;
+/* Webpages | Kill about blank by dude99 */
+webview[src="about:blank"] {opacity:0;} 
+
+
+/* Toolbars | Nuke toolbar editor previews */
+#modal-bg.toolbar-editor h3,
+#modal-bg.toolbar-editor section.dialog-preview {display: none;} 
+
+
+/* Toolbars | Fix a padding glitch for native window users */
+#browser.win.native.address-top.disable-titlebar:not(.tabs-top, .alt) .mainbar .toolbar,
+#browser.linux.native.address-top.disable-titlebar:not(.tabs-top, .alt) .mainbar .toolbar {
+	padding-left: 5px; 
 }
-#browser.win.address-top .toolbar:has(.window-buttongroup.on-mainbar) {
-	min-height: calc(26px / var(--uiZoomLevel));
+
+/* Toolbars | Hide the arrow on vbutton */
+.vivaldi .expand-arrow {display: none;} 
+#browser:not(.tabs-top):has(.vivaldi-v) {--menuWidth: calc(34px + 10px)/2;}
+
+
+/* Toolbars | Thinner toolbar when using vivaldi button */
+#browser.native.win.address-top .toolbar:has(.window-buttongroup.on-mainbar) .vivaldi {
+	height: 28px; transform-origin: top right; /* native mode*/
+}
+#browser.native.win.address-top .toolbar:has(.window-buttongroup.on-mainbar) {
+	min-height: calc(26px / var(--uiZoomLevel)); /* native mode*/
 	padding-left: calc(26px / var(--uiZoomLevel));
 	padding-right: calc((0px * 3) / var(--uiZoomLevel));
 }
+#browser:not(.native).win.address-top .toolbar:has(.window-buttongroup.on-mainbar) {
+		min-height: calc(26px / var(--uiZoomLevel)); /* not native */
+}
+.disable-titlebar#browser.win .window-buttongroup {height: 26px;}  /* not native */
+#browser:not(.native) .mainbar {padding-left: 25px;} /* keep a gap for dragging */
 
-/* Hide not need things in the popup window */
+
+/* Toolbars | Hide not need things in the popup windows */
 #browser.popup .bookmark-bar {display: none;}
 #browser.popup .mainbar {display: none;}
 #browser.popup #panels-container {display: none;}
@@ -16,7 +42,8 @@
 #browser.popup .toolbar.toolbar-droptarget.toolbar-statusbar.toolbar-medium {display: none;}
 #browser.popup .menubar.horizontal {display: none;}
 
-/*Bookmarkbar in urlbar - https://forum.vivaldi.net/post/588331 */
+
+/* Toolbars | Bookmarkbar in urlbar - https://forum.vivaldi.net/post/588331 */
 .bookmark-bar button {width: inherit;} /* fix position */
 button.bookmarkbarItem.chevron {padding: 6px 6px;} /* fix position */
 
@@ -30,7 +57,6 @@ position: absolute; right: 0; z-index: 10;
 #browser.bookmark-bar-top > #main > .bookmark-bar .folder-icon+span {
 	margin-left: 0px;
 }
-/*#main > .inner {background-color: black;}*/
 .bookmark-bar.iconexceptfolders button svg path { /* FA icon instead of chevron*/
 	transform: scale(1.2); transform-origin: 0;
   d: path( /* https://yqnn.github.io/svg-path-editor/ */
@@ -38,12 +64,14 @@ position: absolute; right: 0; z-index: 10;
   )
 }
 
-#header { /* Themed header image from https://heropatterns.com */
-    background-image: url("data:image/svg+xml,%3Csvg width='84' height='48' viewBox='0 0 84 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h12v6H0V0zm28 8h12v6H28V8zm14-8h12v6H42V0zm14 0h12v6H56V0zm0 8h12v6H56V8zM42 8h12v6H42V8zm0 16h12v6H42v-6zm14-8h12v6H56v-6zm14 0h12v6H70v-6zm0-16h12v6H70V0zM28 32h12v6H28v-6zM14 16h12v6H14v-6zM0 24h12v6H0v-6zm0 8h12v6H0v-6zm14 0h12v6H14v-6zm14 8h12v6H28v-6zm-14 0h12v6H14v-6zm28 0h12v6H42v-6zm14-8h12v6H56v-6zm0-8h12v6H56v-6zm14 8h12v6H70v-6zm0 8h12v6H70v-6zM14 24h12v6H14v-6zm14-8h12v6H28v-6zM14 8h12v6H14V8zM0 8h12v6H0V8z' fill='%239C92AC' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
-}
 
-/* Status Bar On Top Mod */
-#header, #browser > footer {order: -1;}
+/* Toolbars | Hide short urlbar warning */
+.UrlBar-AddressField .UrlBar-UrlObfuscationWarning {display: none;}
+
+
+/* Toolbars | Status Bar On Top Mod */
+/*#header, footer:not(.DialogFooter):not(.BookmarkPopup-Footer) {order: -1;}*/
+#header, #browser > footer {order: -1;} /*unbreak status bar buttons*/
 .toolbar-statusbar {background: var(--colorAccentBg); box-shadow: none;} 
 .button-popup { 
     bottom: unset !important; top: 32px; border-radius: 3px;
@@ -71,48 +99,49 @@ position: absolute; right: 0; z-index: 10;
 #tabs-container .resize {order: 1;} /*sync+closed tabs on top|left*/
 .bookmark-bar-top .bookmark-bar {height: 23px;} /*reduce bookmarkbar height*/
 
-/* Remove line under address bar and extensions bar */
+
+/* Toolbars | Remove line under address bar and extensions bar */
 .address-top .mainbar > .toolbar-mainbar .toolbar-extensions:before,
 .address-top .mainbar > .toolbar-mainbar:before {content: unset;}
 .UrlBar-AddressField {order: -1;} /* Navigation buttons AFTER URLbar */
 
-/* Hide unused thing in bookmark popup */
+
+/* Toolbars | Hide unused thing in bookmark popup */
 .BookmarkLocationSelector-Header {display:none;} /*having both BK and SD is redundant*/
 .BookmarkPopup .BookmarkInputField:nth-child(3), /*nickname*/
 .BookmarkPopup .BookmarkInputField:nth-child(4) {display: none;} /*description*/ 
-.BookmarkPopup { min-height: 50vh; } /* make it taller */
 .UrlBar-AddressField .ContentBlocker-Control {display: none;} /* Hide adblocker icon */
+.BookmarkLocationSelector-SearchInput, /*fix a minor mis-padding glitch */
+.BookmarkPopup-TextInputWrapper  {padding-right: 0px;}
 
-/* Ext. buttons big as the profile button */
+
+/* Toolbars | Extension buttons should big as the profile button */
 .toolbar-extensions.toolbar-extensions.toolbar-extensions .button-toolbar > button > img {
 	transform: scale(1.3);
 }
 
-button.ToolbarButton-Button[name='SearchField'] span svg path { 
-  transform: scale(1.5); transform-origin: center; /* Searchbox should be big as the other buttons */
-}
 
-/* Crazy VB-39040 workaround for CookieAutoDelete */
+/* Toolbars | Cookie Autodelete workaround for VB-39040 (broken popup icon with UI under 100% */
 .extension-popup.top > webview[src="chrome-extension://fhcgjolkccmbidfldomjliifgaodjagh/popup/popup.html"] {
-    min-width: 50vh; min-height: 50vh;	
-    max-width: 1000px; max-height: 1200px; 
+	/*min-width: 640px; min-height: 402px;*/
+	min-width: 50vh; min-height: 50vh;	
+    max-width: 1000px; max-height: 1200px; /* ext dev wontfix this :( */
     transform: top-left; 
 }
 
-/* Replace extension button with ol' good chevron */
+
+/* Toolbars | Replace extension button with ol' good chevron */
 .toolbar-extensions svg path {
+	fill: inherit;
 	d: path("M10 13l3.634-3.634c.504-.504 1.366-.147 1.366.566v6.137c0 .713-.862 1.07-1.366.566l-3.634-3.634z");
 } 
 .toolbar-extensions .extensionPopupIcons svg path { 
+	fill: inherit;
 	d: path("M 12.5 16 L 8.86568 12.3657 C 8.36171 11.8617 8.71865 11 9.43137 11 L 15.5686 11 C 16.2814 11 16.6383 11.8617 16.1343 12.3657 L 12.5 16 Z");
 } 
 
-/* Speed Dial: Nyan Mod */
-.startpage .button-startpage {background-color: rgba(0, 0, 0, 0.81);}
-.startpage-navigation {background-image: url(nyan.png); background-size: 150px;}
-button.button-startpage {-webkit-mask-image: unset;}
 
-/* Textures for Tab Containers from https://heropatterns.com */
+/* Tabs | Textures for Tab Containers from https://heropatterns.com */
 #tabs-container.left, #tabs-container.right {
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 	background-size: 100%; background-position: center;
@@ -122,21 +151,22 @@ button.button-startpage {-webkit-mask-image: unset;}
 	background-size: 10%; background-position: center;
 }
 
-/* Accordion arrow takes accent/border color */
-.tab-position.accordion-toggle-arrow {background-color: var(--colorAccentBorder);}
 
-/* Better visibility for favicons on (inactive) tabs */
+/* Tabs | Better visibility for favicons on (inactive) tabs */
 .tab-position .tab .tab-header .favicon {
 filter: drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(-1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(0 1px 0 rgba(246, 246, 246, 0.25)) drop-shadow(0 -1px 0 rgba(246, 246, 246, 0.25));
 }
 
-/* Two Rows of Text */ 
-.tab-position .tab .title  { /*V2*/ /* https://www.freebestfonts.com/bankgothic-lt-bt-font */
-    font-family: "BankGothic Lt BT"; font-size: small;
+
+/* Tabs | Two Rows of Text */ 
+.tab-position .tab .title  {
     align-items: start; white-space: pre-line;
-    line-height: 9px; height: 18px;
+    line-height: 9px; height: 18px;  font-size: smaller;
+    text-transform: uppercase; letter-spacing: .3px;
 } 
 
+
+/* Tabs | Accordion Tweaks */
 #tabs-container.right .tab-position .tab.tab-accordion,
 #tabs-container.left .tab-position .tab.tab-accordion { /* a11y: easier to see closed accordions */
 	background-color: var(--colorAccentBorder); opacity: .6; 
@@ -147,7 +177,7 @@ filter: drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(-1px 0 0 rgba
 }
 .tab-position.accordion-toggle-arrow{width: 97%; opacity: .6;} /*smaller arrow*/
 
-/* border between tabs */
+/* Tabs | Border Between Tabs */
 #tabs-container.top .tab-position .tab,
 #tabs-container.bottom .tab-position .tab { 
 	border-right: 1px groove var(--colorHighlightBgDark);
@@ -157,52 +187,171 @@ filter: drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(-1px 0 0 rgba
 	border-bottom: 1px groove var(--colorHighlightBgDark);
 }
 
-/* Hide thumbnail+tooltip for single tabs ONLY (shown on stacks) */
+
+/* Tabs | Accordion arrow takes accent/border color */
+.tab-position.accordion-toggle-arrow {background-color: var(--colorAccentBorder);}
+
+
+/* Tabs | Hide thumbnail+tooltip for single tabs ONLY (shown on stacks) */
 #vivaldi-tooltip .tooltip .tab-solo {display: none;}
 
-/* Tooltip without thumbnail on stacks too */ /* https://forum.vivaldi.net/post/416458 */
+/* Tabs | Tooltip without thumbnail on stacks too */ /* https://forum.vivaldi.net/post/416458 */
 div#vivaldi-tooltip .tooltip .tooltip-item .thumbnail-image {display: none;}
 
-/* Visual indicator for [vertical] pinned tabs */
+/* Tabs | Visual indicator for [vertical] pinned tabs */
 #tabs-container.right .tab-position .tab.pinned, #tabs-container.left .tab-position .tab.pinned {
   background-image: linear-gradient(315deg, var(--colorFgFaded) 8px, transparent 8px);
 }
 
-#panels-container.left, #panels-container.right { /*texture for Panels from https://heropatterns.com */
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='72' viewBox='0 0 36 72'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M2 6h12L8 18 2 6zm18 36h12l-6 12-6-12z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-	background-size: 50%; background-position: center;
+
+/* Tabs | Panels | Align (Side) Tab Bar & Panel transparency */
+#browser.transparent-tabbar #tabs-tabbar-container.left,
+#browser.transparent-tabbar #tabs-tabbar-container.right {
+	background-color: var(--colorBgAlphaBlur);
+}
+.transparent-tabbar.tabs-right .button-toolbar.workspace-popup.tabbar-workspace-button,
+.transparent-tabbar.tabs-left .button-toolbar.workspace-popup.tabbar-workspace-button {
+	background-color: var(--colorBgAlphaBlur);
+}
+#browser.transparent-tabbar.tabs-top #header,
+#browser.transparent-tabbar.tabs-bottom #header {
+	background-color: var(--colorBgAlphaBlur);
 }
 
+
+/* Panels | Hide site thumb in panels */
+.upper-half .preview, .addbookmark-cardwrapper .upper-half .preview {display: none;} 
+
+
+/* Panels | Hide Text header on internal panels */ 
 .panel > header h1 {display: none;} /* Hide text header on internal panels but... */
 .webpanel-header h1 {display: initial !important;} /* ...show it on webpanels */
 
-/* Grayscale chromium panels */
+
+/* Panels | Grayscale chromium panels */
 .button-toolbar-webpanel [title*="chrome://extensions"] img,
 .button-toolbar-webpanel [title*="chrome://settings"] img,
 .button-toolbar-webpanel [title*="chrome://flags"] img { 
+	/*filter: grayscale(100%);*/
+	/*filter: saturate(0) drop-shadow(0px 0px 0px var(--colorFg));*/
 	filter: invert(1) brightness(1) saturate(0) opacity(.1) drop-shadow(0px 0px 0px var(--colorFgFaded)) drop-shadow(0px 0px 0px var(--colorFgFaded)) drop-shadow(0px 0px 0px var(--colorFgFaded));
 }
 
-/* Grayscale other webpanels */
-.button-toolbar-webpanel [title*="Home"] img { /*Example for Youtube*/
+
+/* Panels | Grayscale other webpanels */
+.button-toolbar-webpanel [title*="Home"] img { /*Youtube*/
+    filter: invert(1) brightness(1) saturate(0) opacity(.7) ;
+}
+.button-toolbar-webpanel [title*="Offerte"] img { /*Vodafone*/
     filter: invert(1) brightness(1) saturate(0) opacity(.7) ;
 }
 
-/* Vivaldi Settings */
+
+/* Panels | Texture for Panels from https://heropatterns.com */
+#panels-container.left, #panels-container.right { 
+	/*background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='72' viewBox='0 0 36 72'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M2 6h12L8 18 2 6zm18 36h12l-6 12-6-12z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");*/
+	/*background-size: 50%; background-position: center;*/
+}
+
+
+/* Settings | Less gap between themes */
 .TabbedView {max-width: 100%;} .ThemePreviews {gap: 28px;}  /* theme page */
 
-/* wrap speed dial text on two rows */
+
+/* Speed Dial | Wrap speed dial text on two rows */
 .dials .dial .button-title { /* For some reasons *only* works at the EOF :D */
     text-align: center; text-overflow: clip; white-space: pre-wrap; 
     height: 31px; line-height: 15px; margin-top: -8px; 
 }
 
-  
-.dials.speeddial img.favicon { /* crisp favicons on dial view */
+ 
+/* Speed Dial | Crisp favicons on dials */ 
+.dials.speeddial img.favicon { 
 filter: drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(-1px 0 0 rgba(246, 246, 246, 0.1)) drop-shadow(0 1px 0 rgba(246, 246, 246, 0.1)) drop-shadow(0 -1px 0 rgba(246, 246, 246, 0.1));
 }
 
-/* Tweak UI fonts */
-/* * {font-family: "Marlett"; text-shadow: 0 0 .8px var(--colorFgAlpha); letter-spacing: .1px;}*/
+
+/* Speed Dial | Nyan Mod */
+.startpage .startpage-navigation {background-color: var(--colorBgAlphaBlur);} 
+.startpage .startpage-navigation .startpage-navigation-group {background-color: var(--colorBgAlphaBlur);} 
+.startpage-navigation {background-image: url(nyan.png); background-size: 150px;} /*static*/
+/*.startpage-navigation {background-image: url(nyan.gif); background-size: 63px;}*/ /*dynamic*/
+.startpage-navigation {
+	background-image: url(https://usagif.com/wp-content/uploads/gify/christmas-lights-transparent-background-20.gif);
+	background-position: center; background-size: 360px; /*xmas edition*/
+} 
 
 
+/* Speed dial | Don't reserve space for scrollbar */
+.startpage .startpage-content .sdwrapper:has(.dials-wrapper) {
+    scrollbar-gutter: unset; 
+}
+
+
+/* Speed Dial | Glowing Effect */
+.dial:hover {box-shadow: 5px 5px 20px var(--colorHighlightBg) !important;}  
+
+
+/* Mail | Compact Header Mod */
+.button-with-dropdown-container > button > span {
+font-size: small; white-space: pre-wrap; text-align: justify;} 
+/* two row for subject */
+.webpageview #mail_view #mail_detail .mail-detail-header {
+	max-height: 50px; /*show only subject*/
+	transition: max-height 3s linear !important; /*smoother*/
+}
+.webpageview #mail_view #mail_detail .mail-detail-header:hover {
+	max-height: 500px; /* show details on hover*/
+}
+.mail-content-blocked {order: 1;}
+.MailWarningMessage.danger {order: 1; height: 25px;}
+.MailWarningMessage.danger:hover {height: auto;}
+
+
+/* Mail | Label on buttons */
+button.ToolbarButton-Button[title*='Check for mail']:after {content: 'Check\00a0';}
+button.ToolbarButton-Button[title*='Compose New Mail']:after {content: 'New\00a0';}
+button.ToolbarButton-Button[title='Reply to All (Shift+R)']:after {content: 'Reply All\00a0';}
+.button-toolbar.button-menu .button-toolbar-menu-indicator.disabled {display: none;}  
+button.ToolbarButton-Button[title='Mark Message as Spam']:after {content: 'Spam\00a0';}   
+button.ToolbarButton-Button[title='Not Spam (Shift+J)']:after {content: 'Not Spam\00a0';}   
+
+
+/* Mail Settings | bigger filter box + spaced text */
+.vivaldi-settings .master-detail.setting-mail-filters textarea.floating-input {
+	min-height: 140px; letter-spacing: 1px; 
+}
+
+
+/* Download Panel | PacMan Mod by MasterLeo https://forum.vivaldi.net/post/706747 */
+.panel.downloads .DownloadItem-ProgressBar.visible {height: 10px;} /*More space for pacman*/
+.panel.downloads .DownloadItem-ProgressBar.loading.visible{
+    --pacman-open: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='19.037' width='18.053' viewBox='0 0 571.11 541.6'%3E%3Cpath style='fill:%23ffcc00' d='M535.441,412.339A280.868,280.868 0 1,1 536.186,161.733L284.493,286.29Z'%3E%3C/path%3E%3C/svg%3E%0A");
+    --pacman-close: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' height='19.037' width='18.053' viewBox='0 0 36 36'%3E%3Ccircle fill='%23ffcc00' cx='18' cy='18' r='18'/%3E%3C/svg%3E");
+    --pacman-point: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' height='11.422' width='10.831' viewBox='0 0 36 36'%3E%3Ccircle fill='%23ffffff' cx='18' cy='15' r='6'/%3E%3C/svg%3E");
+    --pacman-waga-ms: 400ms;
+}
+.panel.downloads .DownloadItem-ProgressBar.loading.visible {background-image: var(--pacman-point);}
+.panel.downloads .DownloadItem-ProgressBar.loading.visible::after {
+  background-image: none;
+  background-color: var(--colorBgFaded);
+}
+.panel.downloads .DownloadItem-ProgressBar.loading.visible::before {
+  background-color: #ffcc00;
+  background-image: none;
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  -webkit-animation: wagawaga var(--pacman-waga-ms) infinite !important;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position-x: calc(var(--progress) * 100%);
+  transition: -webkit-mask-position-x var(--duration) linear !important;
+  -webkit-mask-size: contain;
+}
+
+@keyframes wagawaga {
+  0% {-webkit-mask-image: var(--pacman-open);}
+  50% {-webkit-mask-image: var(--pacman-close);}
+  100% {-webkit-mask-image: var(--pacman-open);}
+}
