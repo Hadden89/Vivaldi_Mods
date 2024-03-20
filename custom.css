@@ -1,5 +1,10 @@
-/* Webpages | Kill about blank by dude99 */
+/* Pages | Kill about blank by dude99 */
 webview[src="about:blank"] {opacity:0;} 
+
+
+/* Pages | Bigger UI Scrollbar */
+::-webkit-scrollbar {width: var(--scrollbarWidth)*2;}
+::-webkit-scrollbar-button {display: none;}
 
 
 /* Toolbars | Nuke toolbar editor previews */
@@ -18,22 +23,6 @@ webview[src="about:blank"] {opacity:0;}
 #browser:not(.tabs-top):has(.vivaldi-v) {--menuWidth: calc(34px + 10px)/2;}
 
 
-/* Toolbars | Thinner toolbar when using vivaldi button */
-#browser.native.win.address-top .toolbar:has(.window-buttongroup.on-mainbar) .vivaldi {
-	height: 28px; transform-origin: top right; /* native mode*/
-}
-#browser.native.win.address-top .toolbar:has(.window-buttongroup.on-mainbar) {
-	min-height: calc(26px / var(--uiZoomLevel)); /* native mode*/
-	padding-left: calc(26px / var(--uiZoomLevel));
-	padding-right: calc((0px * 3) / var(--uiZoomLevel));
-}
-#browser:not(.native).win.address-top .toolbar:has(.window-buttongroup.on-mainbar) {
-		min-height: calc(26px / var(--uiZoomLevel)); /* not native */
-}
-.disable-titlebar#browser.win .window-buttongroup {height: 26px;}  /* not native */
-#browser:not(.native) .mainbar {padding-left: 25px;} /* keep a gap for dragging */
-
-
 /* Toolbars | Hide not need things in the popup windows */
 #browser.popup .bookmark-bar {display: none;}
 #browser.popup .mainbar {display: none;}
@@ -43,13 +32,19 @@ webview[src="about:blank"] {opacity:0;}
 #browser.popup .menubar.horizontal {display: none;}
 
 
+/* Toolbars | Hide dropdown & underline bookmark folders on Text Only */ 
+.bookmark-bar.text .observer .VivaldiSvgIcon {display: none;}
+.bookmark-bar.text .observer .bookmarkbarItem.folder span.title {
+	text-decoration: underline;
+}
+
 /* Toolbars | Bookmarkbar in urlbar - https://forum.vivaldi.net/post/588331 */
-.bookmark-bar button {width: inherit;} /* fix position */
+/*.bookmark-bar button {width: inherit;}*/ /* fix position */
 button.bookmarkbarItem.chevron {padding: 6px 6px;} /* fix position */
 
 #browser.bookmark-bar-top > #main > .bookmark-bar {
 width: var(--bar-width); height: 35px;
-position: absolute; right: 0; z-index: 10;
+position: absolute; right: 0; z-index: 5; 
 }
 :root {--bar-width: 34px;} /*use the same width of other icons*/
 /*@media  (max-width: 800px) {:root {--bar-width: 22px;}}*/
@@ -57,13 +52,20 @@ position: absolute; right: 0; z-index: 10;
 #browser.bookmark-bar-top > #main > .bookmark-bar .folder-icon+span {
 	margin-left: 0px;
 }
-.bookmark-bar.iconexceptfolders button svg path { /* FA icon instead of chevron*/
+/*.bookmark-bar.iconexceptfolders button svg path,*/
+.bookmarkbarItem.chevron svg path { /* FA icon instead of chevron*/
 	transform: scale(1.2); transform-origin: 0;
   d: path( /* https://yqnn.github.io/svg-path-editor/ */
     "M 2.2508 14.8987 c -0.3474 0.1782 -0.7416 -0.1341 -0.6714 -0.5328 l 0.747 -4.257 L -0.8443 7.0885 c -0.2961 -0.2826 -0.1422 -0.7992 0.2547 -0.855 l 4.4082 -0.6264 L 5.7842 1.7128 c 0.1773 -0.351 0.657 -0.351 0.8343 0 l 1.9656 3.8943 l 4.4082 0.6264 c 0.3969 0.0558 0.5508 0.5724 0.2538 0.855 l -3.1698 3.0204 l 0.747 4.257 c 0.0702 0.3987 -0.324 0.711 -0.6714 0.5328 L 6.2 12.8683 l -3.9501 2.0304 z"
   )
 }
 
+/* Toolbars | Bottom setting will place a smaller bookmark bar on Top */
+.bookmark-bar-bottom .bookmark-bar {order: -1; height: 20px;} 
+.bookmark-bar {border: none;} /* remove separation line */
+
+/* Toolbars | Smaller Status bar */ 
+#browser > footer > .toolbar-statusbar {height: 20px;} 
 
 /* Toolbars | Hide short urlbar warning */
 .UrlBar-AddressField .UrlBar-UrlObfuscationWarning {display: none;}
@@ -130,7 +132,7 @@ position: absolute; right: 0; z-index: 10;
 }
 
 
-/* Toolbars | Replace extension button with ol' good chevron */
+/* Toolbars | Replace extension button with ol' good arrow */
 .toolbar-extensions svg path {
 	fill: inherit;
 	d: path("M10 13l3.634-3.634c.504-.504 1.366-.147 1.366.566v6.137c0 .713-.862 1.07-1.366.566l-3.634-3.634z");
@@ -154,7 +156,7 @@ position: absolute; right: 0; z-index: 10;
 
 /* Tabs | Better visibility for favicons on (inactive) tabs */
 .tab-position .tab .tab-header .favicon {
-filter: drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(-1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(0 1px 0 rgba(246, 246, 246, 0.25)) drop-shadow(0 -1px 0 rgba(246, 246, 246, 0.25));
+	filter: drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(-1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(0 1px 0 rgba(246, 246, 246, 0.25)) drop-shadow(0 -1px 0 rgba(246, 246, 246, 0.25));
 }
 
 
@@ -175,7 +177,7 @@ filter: drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(-1px 0 0 rgba
 #tabs-container.left .tab-position .tab:is(.active).tab-accordion {
 	background-color: var(--colorAccentBorder); opacity: 1; /* a11y: easier to see closed accordions */
 }
-.tab-position.accordion-toggle-arrow{width: 97%; opacity: .6;} /*smaller arrow*/
+.tab-position.accordion-toggle-arrow {width: 97%; opacity: .6;} /*smaller arrow*/
 
 /* Tabs | Border Between Tabs */
 #tabs-container.top .tab-position .tab,
@@ -198,10 +200,15 @@ filter: drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(-1px 0 0 rgba
 /* Tabs | Tooltip without thumbnail on stacks too */ /* https://forum.vivaldi.net/post/416458 */
 div#vivaldi-tooltip .tooltip .tooltip-item .thumbnail-image {display: none;}
 
-/* Tabs | Visual indicator for [vertical] pinned tabs */
-#tabs-container.right .tab-position .tab.pinned, #tabs-container.left .tab-position .tab.pinned {
-  background-image: linear-gradient(315deg, var(--colorFgFaded) 8px, transparent 8px);
-}
+/* Tabs | Visual indicator tweaks for tabs */
+.tab-position .tab.pinned { 
+  background-image: linear-gradient(315deg, var(--colorFgFaded) 5px, transparent 5px);
+} /*pinned*/
+
+.tab-position .tab.unread { 
+	background-image: linear-gradient(-135deg, var(--colorFgFaded) 5px, transparent 5px);
+} /*unread*/
+
 
 
 /* Tabs | Panels | Align (Side) Tab Bar & Panel transparency */
@@ -294,7 +301,7 @@ filter: drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(-1px 0 0 rgba
 
 /* Mail | Compact Header Mod */
 .button-with-dropdown-container > button > span {
-font-size: small; white-space: pre-wrap; text-align: justify;} 
+font-size: small; white-space: pre-wrap; text-align: left;} 
 /* two row for subject */
 .webpageview #mail_view #mail_detail .mail-detail-header {
 	max-height: 50px; /*show only subject*/
@@ -321,6 +328,9 @@ button.ToolbarButton-Button[title='Not Spam (Shift+J)']:after {content: 'Not Spa
 .vivaldi-settings .master-detail.setting-mail-filters textarea.floating-input {
 	min-height: 140px; letter-spacing: 1px; 
 }
+
+/* Mail Settings | Hide Mailing List block */
+ .vivaldi-settings .setting-section .setting-mailing-lists {display: none;}
 
 
 /* Download Panel | PacMan Mod by MasterLeo https://forum.vivaldi.net/post/706747 */
