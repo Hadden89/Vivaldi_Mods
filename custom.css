@@ -6,6 +6,17 @@ webview[src="about:blank"] {opacity:0;}
 ::-webkit-scrollbar {width: var(--scrollbarWidth)*2;}
 ::-webkit-scrollbar-button {display: none;}
 
+/* Header | Same as other win11 apps */  /* only for NOT native*/
+/*
+#browser.win:not(.fullscreen, .disable-titlebar) #header  {
+	min-height: calc(32px / var(--uiZoomLevel)); 
+}
+#browser:not(.tabs-top) #titlebar .vivaldi {margin-top: 5px;}
+.address-top#browser.win #titlebar #pagetitle {top: 4px;}
+#browser.win .settings-header {top: 8px;}
+*/
+#browser.win.address-top .toolbar:has(.window-buttongroup.on-mainbar) { min-height: unset; }
+
 
 /* Toolbars | Nuke toolbar editor previews */
 #modal-bg.toolbar-editor h3,
@@ -73,6 +84,8 @@ position: absolute; right: 0; z-index: 5;
 
 /* Toolbars | Status Bar On Top Mod */
 /*#header, footer:not(.DialogFooter):not(.BookmarkPopup-Footer) {order: -1;}*/
+
+#browser:not(.tabs-bottom) footer#footer {border-top: none;} /*remove the black line*/ 
 #header, #browser > footer {order: -1;} /*unbreak status bar buttons*/
 .toolbar-statusbar {background: var(--colorAccentBg); box-shadow: none;} 
 .button-popup { 
@@ -122,6 +135,30 @@ position: absolute; right: 0; z-index: 5;
 	transform: scale(1.3);
 }
 
+/* Toolbars | Vertical Extensions Drop-Down Menu */ /* https://forum.vivaldi.net/post/742203 */
+/*.extensionIconPopupMenu {
+  --popupWidth: 280px !important;
+}
+.extensionIconPopupMenu > .toolbar {
+  max-height: 50vh;
+  overflow: clip auto;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+}
+.extensionIconPopupMenu .ExtensionDropdownIcon > button {
+  justify-content: flex-start;
+  padding: 1em;
+}
+.extensionIconPopupMenu .ExtensionDropdownIcon > button::after {
+  content: attr(title);
+  overflow: clip visible;
+  text-overflow: ellipsis;
+}
+.button-toolbar > button > .button-badge {
+top: auto; right: 10px;
+}*/
+
 
 /* Toolbars | Cookie Autodelete workaround for VB-39040 (broken popup icon with UI under 100% */
 .extension-popup.top > webview[src="chrome-extension://fhcgjolkccmbidfldomjliifgaodjagh/popup/popup.html"] {
@@ -141,6 +178,13 @@ position: absolute; right: 0; z-index: 5;
 	fill: inherit;
 	d: path("M 12.5 16 L 8.86568 12.3657 C 8.36171 11.8617 8.71865 11 9.43137 11 L 15.5686 11 C 16.2814 11 16.6383 11.8617 16.1343 12.3657 L 12.5 16 Z");
 } 
+
+
+/* Tabs | Hide Workspace Sepaerator */
+#browser #tabs-tabbar-container:has(.separator-wsbutton) {
+	padding-top: 0;
+}
+.separator-wsbutton {display: none;}
 
 
 /* Tabs | Textures for Tab Containers from https://heropatterns.com */
@@ -167,6 +211,10 @@ position: absolute; right: 0; z-index: 5;
     text-transform: uppercase; letter-spacing: .3px;
 } 
 
+.tab-position .tab .title:not(:has(.tab-title-edit)) {
+    mask-image: none; /* better visibility on unstacked tabs */
+}
+
 
 /* Tabs | Accordion Tweaks */
 #tabs-container.right .tab-position .tab.tab-accordion,
@@ -188,6 +236,9 @@ position: absolute; right: 0; z-index: 5;
 #tabs-container.left .tab-position .tab {
 	border-bottom: 1px groove var(--colorHighlightBgDark);
 }
+
+/* Tabs | Full Border For Active Tab */
+#tabs-container .tab-position .tab.active {border: 1px groove var(--colorHighlightBgDark);}
 
 
 /* Tabs | Accordion arrow takes accent/border color */
@@ -225,6 +276,52 @@ div#vivaldi-tooltip .tooltip .tooltip-item .thumbnail-image {display: none;}
 	background-color: var(--colorBgAlphaBlur);
 }
 
+/* Tabs Faviconize Active Tabs */
+/* https://forum.vivaldi.net/post/731890 */
+/*.title {width: calc(var(--Width) - 100px) !important;}
+.tab-position {position: static; display: inline;}
+.tab.pinned {
+    background-color: var(--colorAccentBg) !important;
+    display: table-cell;
+}
+.tab.pinned .tab-header {
+    padding: 6px;
+    margin: unset !important;
+}
+.tab.pinned .title, .tab.pinned .close {display: none;}
+*/
+
+/* Panels | Make the pane slightly more compact */ 
+#switch {padding-top: 0px;} /*#panels-container {zoom: 95%;}*/ 
+
+
+/* Panels | Auto-hide panel keeping it fixed */
+#panels-container.left:not(:hover),
+#panels-container.left.resizing:not(:hover),
+#panels-container.right:not(:hover) {
+	max-width: 32px;
+	transition: all 2s ease-in-out !important;
+	transition-delay: 1.5s !important;
+	transition-property: max-width !important;
+}
+#panels-container.left:hover,
+#panels-container.left.resizing:hover,
+#panels-container.right:hover {
+    max-width: 100%;
+	transition: all 2s ease-in-out !important;
+	transition-delay: 1.5s !important;
+	transition-property: max-width !important;
+}
+
+/*
+.tabs-right:not(:hover) .tabbar-wrapper {
+	max-width: 32px;
+}
+.tabs-right:hover .tabbar-wrapper {
+    max-width: auto;
+}
+*/
+
 
 /* Panels | Hide site thumb in panels */
 .upper-half .preview, .addbookmark-cardwrapper .upper-half .preview {display: none;} 
@@ -236,12 +333,13 @@ div#vivaldi-tooltip .tooltip .tooltip-item .thumbnail-image {display: none;}
 
 
 /* Panels | Grayscale chromium panels */
-.button-toolbar-webpanel [title*="chrome://extensions"] img,
-.button-toolbar-webpanel [title*="chrome://settings"] img,
-.button-toolbar-webpanel [title*="chrome://flags"] img { 
-	/*filter: grayscale(100%);*/
-	/*filter: saturate(0) drop-shadow(0px 0px 0px var(--colorFg));*/
-	filter: invert(1) brightness(1) saturate(0) opacity(.1) drop-shadow(0px 0px 0px var(--colorFgFaded)) drop-shadow(0px 0px 0px var(--colorFgFaded)) drop-shadow(0px 0px 0px var(--colorFgFaded));
+/*.button-toolbar-webpanel [title*="chrome://extensions"] img,*/
+.button-toolbar-webpanel [name^="WEBPANEL"] img { 
+	filter: invert(0) brightness(1) saturate(0)	opacity(1)
+			drop-shadow(0px 0px 0px var(--colorFgFaded))
+			drop-shadow(0px 0px 0px var(--colorFgFaded))
+			drop-shadow(0px 0px 0px var(--colorFgFaded))
+			drop-shadow(0px 0px 0px var(--colorFgFaded));
 }
 
 
@@ -264,11 +362,31 @@ div#vivaldi-tooltip .tooltip .tooltip-item .thumbnail-image {display: none;}
 /* Settings | Less gap between themes */
 .TabbedView {max-width: 100%;} .ThemePreviews {gap: 28px;}  /* theme page */
 
+/* Speed Dial | Reduce Head Height and align its setting Button */
+.startpage .SpeedDialView-Head {margin-top: -15px;}
+.startpage-navigation ~ .startpage-content .SpeedDialView-Settings-Button {top: 41px; right: 16px;}
+.SpeedDialView-Settings-Button svg {fill: inherit;} 
+
+/* Speed Dials | Headerless Dashboard Widgets */
+.Dashboard-Widgets .dashboard-widget .dashboard-widget-header h1.title {
+	max-height: 5px; opacity: 0;
+	transition: all .1s ease-in-out !important; transition-delay: .1s;
+}
+.Dashboard-Widgets .dashboard-widget .dashboard-widget-header h1.title:hover {
+	max-height:initial; opacity: 1;
+	transition: all .1s ease-in-out !important; transition-delay: .1s;
+}
+.Dashboard-Webpage .url-wrapper  {height: 1px;}
+
+
+/* Speed dial | Don't reserve space for scrollbar */
+.startpage .startpage-content .sdwrapper:has(.dials-wrapper) {/*scrollbar-gutter: unset;*/}
+
 
 /* Speed Dial | Wrap speed dial text on two rows */
 .dials .dial .button-title { /* For some reasons *only* works at the EOF :D */
     text-align: center; text-overflow: clip; white-space: pre-wrap; 
-    height: 31px; line-height: 15px; margin-top: -8px; 
+    height: 31px; line-height: 11px; margin-top: -5px; 
 }
 
  
@@ -278,22 +396,24 @@ filter: drop-shadow(1px 0 0 rgba(246, 246, 246, 0.25)) drop-shadow(-1px 0 0 rgba
 }
 
 
+/* Speed Dial | Hide Internal Page Titles */
+.button-startpage button .button-title {display: none;}
+
+
 /* Speed Dial | Nyan Mod */
 .startpage .startpage-navigation {background-color: var(--colorBgAlphaBlur);} 
 .startpage .startpage-navigation .startpage-navigation-group {background-color: var(--colorBgAlphaBlur);} 
-.startpage-navigation {background-image: url(nyan.png); background-size: 150px;} /*static*/
+/*.startpage-navigation {background-image: url(nyan.png); background-size: 150px;}*/ /*static*/
 /*.startpage-navigation {background-image: url(nyan.gif); background-size: 63px;}*/ /*dynamic*/
 .startpage-navigation {
-	background-image: url(https://usagif.com/wp-content/uploads/gify/christmas-lights-transparent-background-20.gif);
-	background-position: center; background-size: 360px; /*xmas edition*/
+	/*background-image: url(https://usagif.com/wp-content/uploads/gify/christmas-lights-transparent-background-20.gif);
+	background-position: center; background-size: 360px;*//*xmas edition*/
+	
+	background-image: url(https://usagif.com/wp-content/uploads/2022/hqgif/jack-o-lantern-97-jack-o-lantern-transparent-background.gif);
+	background-position: center; background-size: 40px;*//*october edition*/
+	
+	
 } 
-
-
-/* Speed dial | Don't reserve space for scrollbar */
-.startpage .startpage-content .sdwrapper:has(.dials-wrapper) {
-    scrollbar-gutter: unset; 
-}
-
 
 /* Speed Dial | Glowing Effect */
 .dial:hover {box-shadow: 5px 5px 20px var(--colorHighlightBg) !important;}  
