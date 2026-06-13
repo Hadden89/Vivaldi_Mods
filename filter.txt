@@ -1,0 +1,6 @@
+! Title: filter
+! Version: 2026.06.13
+! Homepage: https://github.com/Hadden89/filter
+
+||cdn.jsdelivr.net/npm/disable-devtool/*
+||fastly.jsdelivr.net/npm/disable-devtool/*
