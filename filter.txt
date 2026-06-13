@@ -4,3 +4,4 @@
 
 ||cdn.jsdelivr.net/npm/disable-devtool/*
 ||fastly.jsdelivr.net/npm/disable-devtool/*
+||static.cloudflareinsights.com/beacon.min.js*
