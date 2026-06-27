@@ -6,5 +6,5 @@
 ||fastly.jsdelivr.net/npm/disable-devtool/*
 
 ! Unbreak hdtoday.tr
-@@||static.cloudflareinsights.com/beacon.min.js$script,domain=hdtoday.tr
-@@||hdtoday.tr^$document
+!! @@||static.cloudflareinsights.com/beacon.min.js$script,domain=hdtoday.tr
+@@||hdtoday.tr^
