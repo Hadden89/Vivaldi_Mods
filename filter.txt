@@ -2,5 +2,6 @@
 ! Version: 2026.06.27
 ! Homepage: https://github.com/Hadden89/filter
 
+||cloudflareinsights.com^$script,important
 @@||themoviedb.org^
 @@||tmdb.org^
