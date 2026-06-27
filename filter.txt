@@ -2,5 +2,5 @@
 ! Version: 2026.06.27
 ! Homepage: https://github.com/Hadden89/filter
 
-@@||themoviedb.org^$important
-@@||tmdb.org^$important
+@@||themoviedb.org^
+@@||tmdb.org^
