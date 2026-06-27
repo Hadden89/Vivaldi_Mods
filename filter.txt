@@ -2,6 +2,10 @@
 ! Version: 2026.06.27
 ! Homepage: https://github.com/Hadden89/filter
 
-@@||hdtoday.tr^$important
-@@||cloudflareinsights.com^$important
+! Allow scripts + requests but keep filter lists active
+@@||hdtoday.tr^$script,important
+@@||hdtoday.tr^$xhr,important
+@@||hdtoday.tr^$ping,important
+
+! Allow necessary analytics if breaking site
 @@||static.cloudflareinsights.com/beacon.min.js$script,important
