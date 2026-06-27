@@ -7,4 +7,4 @@
 
 ! Unbreak hdtoday.tr
 @@||static.cloudflareinsights.com/beacon.min.js$script,domain=hdtoday.tr
-@@*$xhr,ping,domain=hdtoday.tr
+@@||hdtoday.tr^$document
