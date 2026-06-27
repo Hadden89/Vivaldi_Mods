@@ -1,5 +1,0 @@
-! Title: Hadden List
-! Version: 1.0
-! Description: Custom whitelist rules
-
-@@||hdtoday.tr^$document,important
