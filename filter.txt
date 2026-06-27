@@ -8,3 +8,4 @@
 ! Unbreak hdtoday.tr
 !! @@||static.cloudflareinsights.com/beacon.min.js$script,domain=hdtoday.tr
 @@||hdtoday.tr^
+@@||cloudflareinsights.com^
