@@ -1,7 +1,5 @@
-! Title: Hadden Filterlist
-! Version: 2026.06.27
-! Homepage: https://github.com/Hadden89/filter
+! Title: Hadden List
+! Version: 1.0
+! Description: Custom whitelist rules
 
-||cloudflareinsights.com^$script,important
-@@||themoviedb.org^
-@@||tmdb.org^
+@@||hdtoday.tr^$document,important
