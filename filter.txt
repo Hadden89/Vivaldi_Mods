@@ -2,11 +2,6 @@
 ! Version: 2026.06.27
 ! Homepage: https://github.com/Hadden89/filter
 
-||cdn.jsdelivr.net/npm/disable-devtool/*
-||fastly.jsdelivr.net/npm/disable-devtool/*
-
-! Unbreak hdtoday.tr
-!! @@||static.cloudflareinsights.com/beacon.min.js$script,domain=hdtoday.tr
-@@||hdtoday.tr^
-@@||cloudflareinsights.com^$script
-@@||static.cloudflareinsights.com/beacon.min.js$script
+@@||hdtoday.tr^$important
+@@||cloudflareinsights.com^$important
+@@||static.cloudflareinsights.com/beacon.min.js$script,important
