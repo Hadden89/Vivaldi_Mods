@@ -1,0 +1,6 @@
+[Adblock Plus 2.0]
+! Title: Hadden ABP Whitelist
+! Description: Just try to unbreak something.
+
+! Consenti l'intero dominio example.com e tutti i suoi sottodomini
+@@||raptivecdn.com^$document
