@@ -4,3 +4,4 @@
 
 ! Consenti l'intero dominio example.com e tutti i suoi sottodomini
 @@||raptivecdn.com^$document,xmlhttprequest
+@@||convertbox.com^$document,xmlhttprequest
