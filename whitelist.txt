@@ -3,4 +3,4 @@
 ! Description: Just try to unbreak something.
 
 ! Consenti l'intero dominio example.com e tutti i suoi sottodomini
-@@||raptivecdn.com^$document
+@@||raptivecdn.com^$document,xmlhttprequest
